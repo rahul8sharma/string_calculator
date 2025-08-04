@@ -3,7 +3,7 @@
 # StringCalculator provides functionality to add numbers from a string input
 class StringCalculator
   def add(input)
-    return 0 if input.empty?
+    return 0 if input.nil? || input.empty?
 
     numbers = parse_numbers(input)
     validate_negatives(numbers)

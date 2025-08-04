@@ -42,5 +42,18 @@ RSpec.describe StringCalculator do
       expect { calculator.add('1,-2,3') }.to raise_error('negatives not allowed: -2')
       expect { calculator.add('-1,2,-3') }.to raise_error('negatives not allowed: -1, -3')
     end
+
+    it 'handles edge cases with empty delimiters' do
+      expect(calculator.add('1,,2')).to eq(3)
+      expect(calculator.add('1,2,')).to eq(3)
+    end
+
+    it 'handles whitespace in input' do
+      expect(calculator.add(' 1 , 2 , 3 ')).to eq(6)
+    end
+
+    it 'handles nil input' do
+      expect(calculator.add(nil)).to eq(0)
+    end
   end
 end
