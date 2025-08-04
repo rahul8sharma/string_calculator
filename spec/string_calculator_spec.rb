@@ -25,5 +25,11 @@ RSpec.describe StringCalculator do
       expect(calculator.add('1,2,3,4,5')).to eq(15)
       expect(calculator.add('10,20,30,40,50')).to eq(150)
     end
+
+    it 'handles new lines between numbers instead of commas' do
+      expect(calculator.add("1\n2,3")).to eq(6)
+      expect(calculator.add("1,2\n3")).to eq(6)
+      expect(calculator.add("1\n2\n3")).to eq(6)
+    end
   end
 end
