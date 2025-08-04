@@ -19,5 +19,11 @@ RSpec.describe StringCalculator do
       expect(calculator.add('1,2')).to eq(3)
       expect(calculator.add('5,3')).to eq(8)
     end
+
+    it 'allows the add method to handle any amount of numbers' do
+      expect(calculator.add('1,2,3')).to eq(6)
+      expect(calculator.add('1,2,3,4,5')).to eq(15)
+      expect(calculator.add('10,20,30,40,50')).to eq(150)
+    end
   end
 end
