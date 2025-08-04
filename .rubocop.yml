@@ -1,0 +1,39 @@
+# RuboCop configuration for String Calculator project
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+# Allow longer blocks in test files
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+  Max: 50
+
+# Allow longer methods in demo files
+Metrics/MethodLength:
+  Exclude:
+    - 'run_calculator.rb'
+  Max: 20
+
+# Allow higher complexity in demo files
+Metrics/AbcSize:
+  Exclude:
+    - 'run_calculator.rb'
+  Max: 30
+
+# Documentation requirements
+Style/Documentation:
+  Enabled: true
+
+# String literals
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# Frozen string literal
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+# Line length
+Layout/LineLength:
+  Max: 120 

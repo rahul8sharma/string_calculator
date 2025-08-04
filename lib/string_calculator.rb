@@ -1,31 +1,36 @@
 # frozen_string_literal: true
 
+require 'pry'
+require_relative 'calculator/config'
+require_relative 'calculator/exceptions'
+require_relative 'calculator/input_parser'
+require_relative 'calculator/delimiter_extractor'
+require_relative 'calculator/validator'
+require_relative 'calculator/calculator'
+
 # StringCalculator provides functionality to add numbers from a string input
 class StringCalculator
   def add(input)
     return 0 if input.nil? || input.empty?
 
     numbers = parse_numbers(input)
-    validate_negatives(numbers)
-    numbers.sum
+    validate_numbers(numbers)
+    execute_operation(numbers)
   end
 
   private
 
   def parse_numbers(input)
-    if input.start_with?('//')
-      delimiter_line, numbers_string = input.split("\n", 2)
-      delimiter = delimiter_line[2..]
-      numbers_string.split(delimiter).map(&:to_i)
-    else
-      input.split(/[,|\n]/).map(&:to_i)
-    end
+    parser = InputParser.new(input)
+    parser.parse
   end
 
-  def validate_negatives(numbers)
-    negatives = numbers.select(&:negative?)
-    return if negatives.empty?
+  def validate_numbers(numbers)
+    validator = Validator.new(numbers)
+    validator.validate!
+  end
 
-    raise "negatives not allowed: #{negatives.join(', ')}"
+  def execute_operation(numbers)
+    Calculator.add(numbers)
   end
 end
